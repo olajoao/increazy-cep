@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Home from "../views/TheHome.vue";
+import Home from "../views/home/TheHome.vue";
 
 const routes = [
   {
