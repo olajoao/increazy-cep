@@ -19,12 +19,12 @@
             />
           </svg>
         </div>
-        <div class="w-60 border border-white rounded-md text-sm py-1 px-2">
+        <div class="w-60 border-2 border-white rounded-lg text-sm py-1 px-2">
           <p class="font-bold">Surreal São Paulo</p>
           <span class="opacity-70">VTEX</span>
         </div>
       </div>
-      <div>
+      <button class="hover:bg-white/20 rounded-full p-2">
         <svg
           width="32"
           height="32"
@@ -40,7 +40,7 @@
             stroke-linejoin="round"
           />
         </svg>
-      </div>
+      </button>
     </nav>
 
     <!-- right -->
@@ -48,7 +48,7 @@
       class="w-60 border-l-2 border-white/20 flex justify-center items-center gap-3"
     >
       <p class="font-bold">Olá, Joaquim</p>
-      <button class="cursor-pointer">
+      <button class="cursor-pointer group">
         <svg
           width="54"
           height="54"
@@ -57,7 +57,7 @@
           xmlns="http://www.w3.org/2000/svg"
         >
           <circle
-            class="opacity-40 hover:opacity-60"
+            class="opacity-40 group-hover:opacity-60"
             cx="27"
             cy="27"
             r="27"
