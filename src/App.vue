@@ -1,7 +1,9 @@
-<script setup></script>
+<script setup>
+import Header from "./components/header/TheHeader.vue";
+</script>
 
 <template>
-  <h1 class="text-3xl text-red-500 font-bold">Hello Increazy</h1>
+  <Header />
 </template>
 
 <style></style>
