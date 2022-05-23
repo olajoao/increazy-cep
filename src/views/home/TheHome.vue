@@ -9,8 +9,8 @@
 </template>
 
 <script setup>
-import Header from "../components/header/TheHeader.vue";
-import Menu from "../components/menu/TheMenu.vue";
+import Header from "../../components/header/TheHeader.vue";
+import Menu from "../../components/menu/TheMenu.vue";
 </script>
 
 <style></style>
