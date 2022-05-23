@@ -4,6 +4,7 @@
     <aside class="w-20">
       <Menu />
     </aside>
+<<<<<<< HEAD
     <main class="flex-1">
       <form action="">
         <div class="flex gap-5">
@@ -21,6 +22,9 @@
         </div>
       </form>
     </main>
+=======
+    <main class="flex-1"></main>
+>>>>>>> master
   </section>
 </template>
 
