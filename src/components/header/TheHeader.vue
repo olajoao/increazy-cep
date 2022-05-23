@@ -1,5 +1,5 @@
 <template>
-  <header class="bg-purple-700 text-white flex">
+  <header class="bg-purple-primary text-white flex">
     <!-- left -->
     <nav class="flex-1 flex items-center justify-between p-3">
       <div class="flex gap-5">
