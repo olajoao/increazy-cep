@@ -4,3 +4,4 @@
 - Navegar até a pasta do projeto
 - npm install
 - npm run dev
+- have fun ;)
