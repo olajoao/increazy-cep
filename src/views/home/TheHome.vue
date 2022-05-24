@@ -5,64 +5,40 @@
       <Menu />
     </aside>
     <main class="flex-1 p-8 max-w-2xl">
-      <form action="">
-        <div class="flex gap-5">
-          <label for="cep">
-            <input
-              class="p-2 rounded-md border border-zinc-400 placeholder:text-zinc-400 text-zinc-600 font-medium"
-              type="number"
-              placeholder="Insira o CEP"
-            />
-          </label>
-          <button
-            class="flex ml-auto items-center font-medium gap-2 py-2 w-72 justify-center text-white rounded-md bg-purple-second"
-            type="submit"
-          >
-            <PlusIcon class="w-5 h-5" />
-            <span>Adicionar endereço</span>
-          </button>
-        </div>
-      </form>
+      <CepForm
+        :cep="cep"
+        :is-cep-wrong="isCepWrong"
+        :add-cep-to-list="addCepToList"
+        @input-change-cep="getCepValueFromChild"
+      />
 
-      <ul class="my-10">
-        <li class="flex items-center">
-          <LocationMarkerIcon class="mr-5 w-7 h-9 text-purple-primary" />
-          <p class="font-bold text-lg text-zinc-400">
-            <span class="text-zinc-800 mr-2">CEP</span>38304-042
-          </p>
-        </li>
+      <ul class="my-10 max-h-[110px] overflow-y-auto">
+        <transition-group name="list" tag="li">
+          <li
+            class="flex items-center"
+            v-for="(cep, index) in cepList"
+            :key="index"
+          >
+            <LocationMarkerIcon class="mr-5 w-7 h-9 text-purple-primary" />
+            <p class="font-bold text-lg text-zinc-400">
+              <span class="text-zinc-800 mr-2">CEP</span>{{ cep }}
+            </p>
+          </li>
+        </transition-group>
       </ul>
 
       <div class="flex justify-end">
-        <button
-          class="flex items-center font-medium gap-2 py-2 w-72 justify-center text-white rounded-md bg-purple-second"
-          type="submit"
-        >
-          <span>Gerar endereços</span>
-        </button>
+        <ButtonDefault @click="getCepInfos" text="Gerar endereços" />
       </div>
 
       <hr class="w-full h-0.5 bg-zinc-300 my-10" />
 
-      <article class="rounded-lg shadow shadow-zinc-300 flex py-2">
-        <div class="flex items-center flex-1 gap-3 px-3 py-5">
-          <LocationMarkerIcon class="w-5 h-5 text-purple-primary" />
-          <div class="flex w-full pr-2 justify-between items-center">
-            <div>
-              <p class="font-bold">Av. São Paulo, Zona 07</p>
-              <p class="text-sm">Maringá - PR</p>
-            </div>
-            <p class="text-purple-primary">88162-122</p>
-          </div>
-        </div>
-        <div
-          class="border-l border-zinc-200 w-16 flex items-center justify-center"
-        >
-          <button>
-            <TrashIcon class="h-5 w-5 text-red-500" />
-          </button>
-        </div>
-      </article>
+      <CepInfoCard
+        v-for="(cepInfo, index) in storeCepList"
+        :key="index"
+        :cepInfo="cepInfo"
+        @delete-cep-from-list="deleteCep(index)"
+      />
     </main>
   </section>
 </template>
@@ -71,7 +47,68 @@
 import Header from "../../components/header/TheHeader.vue";
 import Menu from "../../components/menu/TheMenu.vue";
 import { PlusIcon } from "@heroicons/vue/outline";
-import { LocationMarkerIcon, TrashIcon } from "@heroicons/vue/solid";
+import { LocationMarkerIcon } from "@heroicons/vue/solid";
+import { useCepStore } from "../../store/CepStore";
+import { ref } from "@vue/reactivity";
+import CepInfoCard from "./components/CepInfoCard.vue";
+import ButtonDefault from "../../components/buttons/ButtonDefault.vue";
+import CepForm from "./components/CepForm.vue";
+
+const cepStore = useCepStore();
+
+let cep = ref(null);
+let cepList = ref([]);
+let storeCepList = ref(cepStore.cepList);
+
+// helpers
+let isCepWrong = ref(false);
+
+function getCepValueFromChild(childCep) {
+  cep.value = childCep;
+}
+
+function addCepToList() {
+  isCepWrong.value = false;
+  let stringfiedCep = String(cep.value);
+
+  if (stringfiedCep && stringfiedCep.length === 8) {
+    cepList.value.push(stringfiedCep);
+    cep.value = "";
+  } else {
+    isCepWrong.value = true;
+  }
+}
+
+function getCepInfos() {
+  for (let cep in cepList.value) {
+    let stringfiedCep = String(cepList.value[cep]);
+
+    cepStore
+      .getCeps(stringfiedCep)
+      .then((res) => {
+        if (res.data.erro) return;
+        cepStore.pushCep(res.data);
+      })
+      .catch((error) => console.log("CEP Inválido: ", error));
+  }
+
+  cepList.value = [];
+}
+
+function deleteCep(cepIndex) {
+  cepStore.deleteItem(cepIndex);
+  storeCepList.value = cepStore.cepList;
+}
 </script>
 
-<style></style>
+<style scoped>
+.list-enter-active,
+.list-leave-active {
+  transition: opacity 500ms ease;
+}
+
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+}
+</style>
