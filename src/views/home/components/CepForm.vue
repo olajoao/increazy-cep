@@ -6,8 +6,9 @@
           v-model="cep"
           class="p-2 outline-none ring-2 focus:ring-purple-primary/60 rounded-md border border-zinc-300 placeholder:text-zinc-400 text-zinc-600 font-medium"
           :class="[isCepWrong ? 'ring-red-500' : 'ring-transparent']"
-          type="number"
+          type="text"
           placeholder="Insira o CEP"
+          v-mask="['##.###-###']"
         />
       </label>
 
