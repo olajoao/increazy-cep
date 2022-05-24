@@ -8,6 +8,14 @@ export const useCepStore = defineStore("CepStore", {
     };
   },
   actions: {
+    pushCep(cepInfos) {
+      this.cepList.push(cepInfos);
+    },
+    deleteItem(cepIndex) {
+      console.log(this.cepList);
+      this.cepList = this.cepList.filter((_, index) => index != cepIndex);
+      console.log(this.cepList);
+    },
     async getCeps(cep) {
       return request.get(`/${cep}/json/`);
     },
