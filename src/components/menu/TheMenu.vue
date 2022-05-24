@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="flex flex-col items-center py-8 justify-between bg-zinc-100 h-[calc(100vh-76px)]"
+    class="hidden lg:flex flex-col items-center py-8 justify-between bg-zinc-100 h-[calc(100vh-76px)]"
   >
     <div class="flex flex-col gap-10">
       <button class="group">

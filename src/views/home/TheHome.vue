@@ -1,11 +1,11 @@
 <template>
   <Header />
   <section class="flex">
-    <aside class="w-20">
+    <aside class="hidden lg:block w-20">
       <Menu />
     </aside>
     <main
-      class="flex-1 p-8 max-w-2xl max-h-[calc(100vh-76px)] overflow-y-auto side__infos"
+      class="flex-1 p-3 lg:p-8 max-w-2xl max-h-[calc(100vh-76px)] overflow-y-auto side__infos"
     >
       <CepForm
         :cep="cep"

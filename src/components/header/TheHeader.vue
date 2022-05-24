@@ -5,8 +5,7 @@
       <div class="flex gap-5">
         <div>
           <svg
-            width="50"
-            height="50"
+            class="h-7 w-7 2xl:w-[50px] 2xl:h-[50px]"
             viewBox="0 0 50 50"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -19,19 +18,26 @@
             />
           </svg>
         </div>
-        <div class="w-60 border-2 border-white rounded-lg text-sm py-1 px-2">
+        <div
+          class="hidden lg:block w-60 border-2 border-white rounded-lg text-sm py-1 px-2"
+        >
           <p class="font-bold">Surreal São Paulo</p>
           <span class="opacity-70">VTEX</span>
         </div>
       </div>
-      <button class="hover:bg-white/20 rounded-full p-2">
+      <button class="hover:bg-white/20 rounded-full p-2 hidden lg:block">
         <BellIcon class="w-8 h-8 text-white" />
+      </button>
+
+      <!-- mobile button -->
+      <button @click="toggleMobileMenu">
+        <AdjustmentsIcon class="w-7 h-7 text-white" />
       </button>
     </nav>
 
     <!-- right -->
     <aside
-      class="w-60 border-l-2 border-white/20 flex justify-center items-center gap-3"
+      class="hidden lg:flex w-60 border-l-2 border-white/20 justify-center items-center gap-3"
     >
       <p class="font-bold">Olá, Joaquim</p>
       <button
@@ -40,9 +46,58 @@
         <UserIcon class="w-6 h-6 text-white" />
       </button>
     </aside>
+
+    <!-- mobile -->
+    <Transition name="menu">
+      <section
+        v-if="menuMobile"
+        class="px-3 py-5 fixed w-screen h-screen bg-white text-zinc-600 mt-[52px] z-10"
+      >
+        <ul>
+          <li class="flex items-center gap-3">
+            <SearchIcon class="w-5 h-5" />
+            <span>Pesquisar</span>
+          </li>
+          <li class="my-5 flex items-center gap-3">
+            <FolderIcon class="w-5 h-5" />
+            <span>Arquivos</span>
+          </li>
+          <li class="my-5 flex items-center gap-3">
+            <AdjustmentsIcon class="w-5 h-5" />
+            <span>Configurações</span>
+          </li>
+          <li class="my-5 flex items-center gap-3">
+            <UserIcon class="w-5 h-5" />
+            <span>Perfil</span>
+          </li>
+        </ul>
+      </section>
+    </Transition>
   </header>
 </template>
 
 <script setup>
-import { BellIcon, UserIcon } from "@heroicons/vue/outline";
+import {
+  BellIcon,
+  UserIcon,
+  AdjustmentsIcon,
+  FolderIcon,
+  SearchIcon,
+} from "@heroicons/vue/outline";
+import { ref } from "@vue/reactivity";
+
+let menuMobile = ref(false);
+
+const toggleMobileMenu = () => (menuMobile.value = !menuMobile.value);
 </script>
+<style scoped>
+.menu-enter-active,
+.menu-leave-active {
+  transition: opacity 500ms ease;
+}
+
+.menu-enter-from,
+.menu-leave-to {
+  opacity: 0;
+}
+</style>
