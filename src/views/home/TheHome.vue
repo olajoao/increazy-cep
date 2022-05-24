@@ -72,6 +72,11 @@ import Header from "../../components/header/TheHeader.vue";
 import Menu from "../../components/menu/TheMenu.vue";
 import { PlusIcon } from "@heroicons/vue/outline";
 import { LocationMarkerIcon, TrashIcon } from "@heroicons/vue/solid";
+import { useCepStore } from "../../store/CepStore";
+
+const cepStore = useCepStore();
+
+cepStore.getCeps("01001000").then((res) => console.log(res));
 </script>
 
 <style></style>
