@@ -4,7 +4,9 @@
     <aside class="w-20">
       <Menu />
     </aside>
-    <main class="flex-1 p-8 max-w-2xl">
+    <main
+      class="flex-1 p-8 max-w-2xl max-h-[calc(100vh-76px)] overflow-y-auto side__infos"
+    >
       <CepForm
         :cep="cep"
         :is-cep-wrong="isCepWrong"
@@ -12,7 +14,7 @@
         @input-change-cep="getCepValueFromChild"
       />
 
-      <ul class="my-10 max-h-[110px] overflow-y-auto">
+      <ul class="my-10 max-h-[110px] overflow-y-auto side__infos">
         <transition-group name="list" tag="li">
           <li
             class="flex items-center"
@@ -33,12 +35,14 @@
 
       <hr class="w-full h-0.5 bg-zinc-300 my-10" />
 
-      <CepInfoCard
-        v-for="(cepInfo, index) in storeCepList"
-        :key="index"
-        :cepInfo="cepInfo"
-        @delete-cep-from-list="deleteCep(index)"
-      />
+      <transition-group name="infos" tag="article">
+        <CepInfoCard
+          v-for="(cepInfo, index) in storeCepList"
+          :key="index"
+          :cepInfo="cepInfo"
+          @delete-cep-from-list="deleteCep(index)"
+        />
+      </transition-group>
     </main>
   </section>
 </template>
@@ -64,11 +68,17 @@ let storeCepList = ref(cepStore.cepList);
 let isCepWrong = ref(false);
 
 function getCepValueFromChild(childCep) {
-  cep.value = childCep;
+  let clearedCep = String(childCep).replace(
+    /[ '~!@#$%^&()_|+\-=?;:'",.<>{}[\]\\/]/gi,
+    ""
+  );
+
+  cep.value = clearedCep;
 }
 
 function addCepToList() {
   isCepWrong.value = false;
+
   let stringfiedCep = String(cep.value);
 
   if (stringfiedCep && stringfiedCep.length === 8) {
@@ -103,12 +113,16 @@ function deleteCep(cepIndex) {
 
 <style scoped>
 .list-enter-active,
-.list-leave-active {
+.list-leave-active,
+.infos-enter-active,
+.infos-leave-active {
   transition: opacity 500ms ease;
 }
 
 .list-enter-from,
-.list-leave-to {
+.list-leave-to,
+.infos-enter-from,
+.infos-leave-to {
   opacity: 0;
 }
 </style>
