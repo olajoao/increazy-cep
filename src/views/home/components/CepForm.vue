@@ -1,10 +1,10 @@
 <template>
   <form action="">
-    <div class="flex flex-wrap gap-5">
-      <label for="cep" class="w-full">
+    <div class="flex flex-wrap lg:flex-nowrap gap-5">
+      <label for="cep" class="w-full lg:w-auto">
         <input
           v-model="cep"
-          class="w-full lg:w-auto p-2 outline-none ring-2 focus:ring-purple-primary/60 rounded-md border border-zinc-300 placeholder:text-zinc-400 text-zinc-600 font-medium"
+          class="text-sm 2xl:text-base w-full lg:w-auto p-2 outline-none ring-2 focus:ring-purple-primary/60 rounded-md border border-zinc-300 placeholder:text-zinc-400 text-zinc-600 font-medium"
           :class="[isCepWrong ? 'ring-red-500' : 'ring-transparent']"
           type="text"
           placeholder="Insira o CEP"

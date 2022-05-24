@@ -5,7 +5,7 @@
       <Menu />
     </aside>
     <main
-      class="flex-1 p-3 lg:p-8 max-w-2xl max-h-[calc(100vh-76px)] overflow-y-auto side__infos"
+      class="flex-1 p-3 lg:p-8 max-w-xl 2xl:max-w-2xl max-h-[calc(100vh-76px)] overflow-y-auto side__infos"
     >
       <CepForm
         :cep="cep"
@@ -21,8 +21,10 @@
             v-for="(cep, index) in cepList"
             :key="index"
           >
-            <LocationMarkerIcon class="mr-5 w-7 h-9 text-purple-primary" />
-            <p class="font-bold text-lg text-zinc-400">
+            <LocationMarkerIcon
+              class="mr-5 w-6 2xl:w-7 h-8 2xl:h-9 text-purple-primary"
+            />
+            <p class="font-bold 2xl:text-lg text-zinc-400">
               <span class="text-zinc-800 mr-2">CEP</span>{{ cep }}
             </p>
           </li>

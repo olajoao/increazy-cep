@@ -5,7 +5,7 @@
       <div class="flex gap-5">
         <div>
           <svg
-            class="h-7 w-7 2xl:w-[50px] 2xl:h-[50px]"
+            class="h-7 w-7 lg:w-[50px] lg:h-[50px]"
             viewBox="0 0 50 50"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -30,7 +30,7 @@
       </button>
 
       <!-- mobile button -->
-      <button @click="toggleMobileMenu">
+      <button @click="toggleMobileMenu" class="lg:hidden">
         <AdjustmentsIcon class="w-7 h-7 text-white" />
       </button>
     </nav>
@@ -51,7 +51,7 @@
     <Transition name="menu">
       <section
         v-if="menuMobile"
-        class="px-3 py-5 fixed w-screen h-screen bg-white text-zinc-600 mt-[52px] z-10"
+        class="lg:hidden px-3 py-5 fixed w-screen h-screen bg-white text-zinc-600 mt-[52px] z-10"
       >
         <ul>
           <li class="flex items-center gap-3">
