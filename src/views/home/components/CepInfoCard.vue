@@ -1,8 +1,8 @@
 <template>
-  <article class="rounded-lg shadow shadow-zinc-300 flex py-2 mb-5">
-    <div class="flex items-center flex-1 gap-3 px-3 py-5">
-      <LocationMarkerIcon class="w-5 h-5 text-purple-primary" />
-      <div class="flex w-full pr-2 justify-between items-center">
+  <article class="rounded-lg shadow shadow-zinc-300 flex lg:py-2 mb-5">
+    <div class="flex items-center flex-1 gap-3 px-3 py-2 lg:py-5">
+      <LocationMarkerIcon class="hidden lg:block w-5 h-5 text-purple-primary" />
+      <div class="lg:flex w-full pr-2 justify-between items-center">
         <div>
           <p class="font-bold">
             {{ `${cepInfo.logradouro}, ${cepInfo.bairro}` }}
@@ -10,8 +10,9 @@
           <p class="text-sm">
             {{ `${cepInfo.localidade} - ${cepInfo.uf}` }}
           </p>
+          <p class="text-purple-primary lg:hidden">{{ cepInfo.cep }}</p>
         </div>
-        <p class="text-purple-primary">{{ cepInfo.cep }}</p>
+        <p class="hidden lg:block text-purple-primary">{{ cepInfo.cep }}</p>
       </div>
     </div>
     <div class="border-l border-zinc-200 w-16 flex items-center justify-center">
